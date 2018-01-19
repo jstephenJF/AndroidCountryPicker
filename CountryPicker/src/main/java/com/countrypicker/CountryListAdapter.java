@@ -1,9 +1,5 @@
 package com.countrypicker;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.countrypicker.R.drawable;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Locale;
 
 public class CountryListAdapter extends BaseAdapter {
 
@@ -97,8 +97,12 @@ public class CountryListAdapter extends BaseAdapter {
 		// Load drawable dynamically from country code
 		String drawableName = "flag_"
 				+ country.getCode().toLowerCase(Locale.ENGLISH);
-		cell.imageView.setImageResource(getResId(drawableName));
-		return cellView;
+        try {
+            cell.imageView.setImageResource(getResId(drawableName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cellView;
 	}
 
 	/**
